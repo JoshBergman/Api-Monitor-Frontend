@@ -1,0 +1,11 @@
+.linkButtonText {
+    text-decoration: none;
+    color: white;
+}
+
+.list {
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}

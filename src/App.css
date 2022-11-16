@@ -1,0 +1,21 @@
+.pageContainer {
+  background-color: rgb(83, 85, 89);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow-y: scroll;
+}
+
+.widthControlContainer {
+  width: 80%;
+  height: fit-content;
+
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+@media (max-width: 680px) {
+  .widthControlContainer {
+    width: 100%;
+  }
+}

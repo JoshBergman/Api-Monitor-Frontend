@@ -1,0 +1,12 @@
+.card {
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 20px;
+
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    margin: 20px auto;
+    box-shadow: 0 0 15px black;
+}
