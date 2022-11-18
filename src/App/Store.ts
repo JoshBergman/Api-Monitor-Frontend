@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import styleReducer from '../Features/StyleSlice';
+import APIReducer from '../Features/APISlice';
 
 export const store = configureStore({
     reducer: {
-        style: styleReducer
+        style: styleReducer,
+        API: APIReducer,
     }
 });
 

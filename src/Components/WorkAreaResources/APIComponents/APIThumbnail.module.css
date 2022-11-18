@@ -7,6 +7,10 @@
     text-align: left;
 }
 
+.title {
+    font-size: 25px;
+}
+
 .rightContainer {
     width: 20%;
     float: right;
@@ -14,7 +18,7 @@
 
 .leftContainer {
     width: 70%;
-    height: 100px;
+    height: 80px;
     display: inline-block;
     margin-top: -20px;
 }
@@ -30,6 +34,7 @@
 .endpoint {
     margin: 0;
     margin-top: -20px;
+    font-size: 14px;
 }
 
 .expandContainer {

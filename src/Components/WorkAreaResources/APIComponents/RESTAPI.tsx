@@ -5,13 +5,15 @@ import Button from '../../UI/Resources/Button';
 import APIThumbnail from './APIThumbnail';
 
 interface RESTProps {
-    title: string;
-    url: string;
-    method: string;
-    body?: string | object;
+    settings: {
+        title: string;
+        endpoint: string;
+        method: string;
+        body?: string | object;
+    }
 }
 
-export default function RESTAPI({title, url, method, body}:RESTProps) {
+export default function RESTAPI({settings}:RESTProps) {
     const [currRaw, setCurrRaw] = useState({Header: "Headers"});
     const [isThumbnail, setIsThumbnail] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -21,8 +23,8 @@ export default function RESTAPI({title, url, method, body}:RESTProps) {
     let raw: any;
     const onAPICall = async () => {
         response = 
-            await fetch(url, {
-                method: 'GET',
+            await fetch(settings.endpoint, {
+                method: settings.method,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -70,12 +72,12 @@ export default function RESTAPI({title, url, method, body}:RESTProps) {
 
   return (
     <div className={styles.apiContainer}>
-        {isThumbnail && <APIThumbnail method={method} title={title} type="REST" endpoint={url} toggleThumbnail={thumbnailHandler} />}
+        {isThumbnail && <APIThumbnail method={settings.method} title={settings.title} type="REST" endpoint={settings.endpoint} toggleThumbnail={thumbnailHandler} />}
         {!isThumbnail &&
         <React.Fragment>
-            <h1 className={styles.title}>{title}</h1>
+            <h1 className={styles.title}>{settings.title}</h1>
             <h3 className={styles.title}>API Type: REST</h3>
-            <h5 className={styles.title}>Endpoint: {url}</h5>
+            <h5 className={styles.title}>Endpoint: {settings.endpoint}</h5>
             <div className={styles.reqButton}>
             {!loading && <Button onClick={requestHandler}>Make Req</Button>}
             {loading && <Button>LOADING</Button>}
@@ -83,15 +85,15 @@ export default function RESTAPI({title, url, method, body}:RESTProps) {
             <h3>Request Settings:</h3>
             <div className={styles.currSettings}>
                 <ul>
-                    <li>Method: {method}</li>
+                    <li>Method: {settings.method}</li>
                     <li>Mode: CORS</li>
                     <li>Headers: 
                         <ul>
                             <li>Content-Type: application/json</li>
                         </ul>
                     </li>
-                    {body &&
-                    <li>Body: JSON.stringify({unnestObject(body)})</li>
+                    {settings.body &&
+                    <li>Body: JSON.stringify({unnestObject(settings.body)})</li>
                     }
                 </ul>
             </div>

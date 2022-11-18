@@ -6,16 +6,21 @@ import GRAPHQLAPI from './GRAPHQLAPI';
 
 interface APIProps {
   type: string;
+  APISettings: {
+    endpoint: string;
+    method: string;
+    title: string;
+  };
 }
 
 //use redux to populate the apis then access and sort them from here
 //use high level component that is only rendered once to call redux action to populate api list(s)
 
-export default function APICard({type}:APIProps) {
+export default function APICard({type, APISettings}:APIProps) {
   return (
     <Card width="90%" height="fit-content" >
       <React.Fragment>
-        { type === "REST" && <RESTAPI url="https://swapi.dev/api/people/1/" title="SWAPI" method="GET" /> }
+        { type === "REST" && <RESTAPI settings={APISettings} /> }
         { type === "GRAPHQL" && <GRAPHQLAPI /> }
       </React.Fragment>
     </Card>
