@@ -13,11 +13,11 @@ function App() {
           <Routes>
             <Route 
             path="/welcome" 
-            element={<LandingPage />} 
+            element={<LandingPage />}
             />
             <Route 
             path="/guest-home" 
-            element={<GuestPage />} 
+            element={<GuestPage />}
             />
             <Route
             path="*"

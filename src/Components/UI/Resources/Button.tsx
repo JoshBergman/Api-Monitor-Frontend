@@ -6,11 +6,16 @@ import styles from './Button.module.css';
 interface Props {
     children: string | JSX.Element;
     to?: string;
+    onClick?: () => void;
 }
 
-export default function Button({children, to}:Props) {
+export default function Button({children, to, onClick}:Props) {
 
-    const buttonContent = <button className={styles.button}>{children}</button>;
+    let buttonContent = <button className={styles.button}>{children}</button>;
+
+    if (onClick) {
+        buttonContent = <button onClick={onClick} className={styles.button}>{children}</button>;
+    }
 
   return (
     <React.Fragment>

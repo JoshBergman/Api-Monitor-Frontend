@@ -1,0 +1,57 @@
+.masterContainer {
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
+    overflow-wrap:normal;
+
+    text-align: left;
+}
+
+.rightContainer {
+    width: 20%;
+    float: right;
+}
+
+.leftContainer {
+    width: 70%;
+    height: 100px;
+    display: inline-block;
+    margin-top: -20px;
+}
+
+.type {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-right: -30px;
+}
+
+.endpoint {
+    margin: 0;
+    margin-top: -20px;
+}
+
+.expandContainer {
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: -10px;
+}
+
+@media (max-width: 400px) {
+    .rightContainer {
+        width: 0;
+    }
+
+    .leftContainer {
+        width: 100%;
+    }
+
+    .type {
+        font-size: 0;
+    }
+
+    .endpoint {
+        font-size: 0;
+    }
+}

@@ -1,0 +1,26 @@
+.responseDiv {
+    height: fit-content;
+    max-height: 400px;
+    border: 1px solid;
+    overflow-y: scroll;
+}
+
+.apiContainer {
+    width: 100%;
+    height: fit-content;
+
+    text-align: left;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.reqButton {
+    width: fit-content;
+    height: fit-content;
+
+    margin: 0 auto;
+}
