@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface APIState {
-    APIs: {
-        type: string;
+export interface API {
+    type: string;
         settings: {
             endpoint: string;
             method: string;
             title: string;
         }
-    }[]
+}
 
+interface APIState {
+    APIs: API[]
 }
 
 //function to go through local storage string for API's and break it down into array (Helper function to getFromStorage())
@@ -100,8 +101,18 @@ export const APISlice = createSlice({
     name: "style",
     initialState: initialState,
     reducers: {
-        populateLocalStorage: (state) => {
-            console.log(getFromStorage());
+        addNewAPI: (state, action) => {
+            state.APIs.push(action.payload); //payload must be a APIState object
+        },
+        delAPI: (state, action) => {
+            state.APIs = (
+            state.APIs.filter((currAPI) => {
+                if(action.payload === currAPI.settings.title){
+                    return false;
+                } else {
+                    return true;
+                }
+            }));
         },
         saveLocalStorage: (state, action) => {
             localStorage.clear(); // clear storage, set dark mode, then populate with current api's
@@ -110,14 +121,12 @@ export const APISlice = createSlice({
             state.APIs.forEach((api) => {
                 i++;
                 const apiKeyString =  api.settings.title + '+' + api.settings.method + '+' + api.settings.endpoint;
-                console.log(api.type + i);
-                console.log(apiKeyString);
                 localStorage.setItem(api.type + '+' + i, apiKeyString);
-            })
+            });
         },
     },
 });
 
-export const { populateLocalStorage, saveLocalStorage } = APISlice.actions //export actions
+export const { delAPI, addNewAPI, saveLocalStorage } = APISlice.actions //export actions
 
 export default APISlice.reducer;

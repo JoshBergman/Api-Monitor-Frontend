@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IoIosArrowUp } from 'react-icons/io';
 
 import styles from './API.module.css';
 import Button from '../../UI/Resources/Button';
 import APIThumbnail from './APIThumbnail';
 import { RootState } from '../../../App/Store';
+import { delAPI, saveLocalStorage } from '../../../Features/APISlice';
 
 interface RESTProps {
     settings: {
@@ -21,6 +22,8 @@ export default function RESTAPI({settings}:RESTProps) {
     const [isThumbnail, setIsThumbnail] = useState(true);
     const [loading, setLoading] = useState(false);
     const [currReponse, setResponse] = useState({"API" : "Response Body"});
+
+    const dispatch = useDispatch();
 
     let response: any;
     let raw: any;
@@ -73,7 +76,9 @@ export default function RESTAPI({settings}:RESTProps) {
         setIsThumbnail((prevState) => {return !prevState});
     };
 
-    const arrowColor = useSelector((state:RootState) => state.style.styles.textColor);
+    const styleRedux = useSelector((state:RootState) => state.style);
+    const arrowColor = styleRedux.styles.textColor;
+    const currDark = styleRedux.isDark;
 
   return (
     <div className={styles.apiContainer}>
@@ -116,6 +121,7 @@ export default function RESTAPI({settings}:RESTProps) {
                     {unnestObject( currReponse )}
                 </ul>
             </div>
+            <button onClick={() => {dispatch(delAPI(settings.title)); dispatch(saveLocalStorage(currDark));}}>Delete Me!</button>
             <div className={styles.reqButton}>
             <button className={styles.collapseButton} onClick={thumbnailHandler}><IoIosArrowUp style={arrowColor} className={styles.collapseArrow} /></button>
             </div>
