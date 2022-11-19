@@ -16,3 +16,16 @@
     background-color: lightblue;
     color: black;
 }
+
+.darkButton {
+    background-color: transparent;
+    width: fit-content;
+    height: fit-content;
+
+    border-color: transparent;
+}
+
+.darkIcon {
+    transition: all 0.35s ease-in-out;
+    font-size: 60px;
+}

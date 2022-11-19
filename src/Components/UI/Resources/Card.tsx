@@ -37,7 +37,7 @@ export default function Card(props: Props) {
 
     return (
     <div style={combinedStyle} className={styles.card}>
-        {props.children}
+            {props.children}
     </div>
   );
 }

@@ -43,6 +43,20 @@
     margin-top: -10px;
 }
 
+.expandButton {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.expandArrow {
+    font-size: 25px;
+    transition: all 0.2s ease-in-out;
+}
+
+.expandArrow:hover {
+    transform: translateY(3px);
+}
+
 @media (max-width: 400px) {
     .rightContainer {
         width: 0;

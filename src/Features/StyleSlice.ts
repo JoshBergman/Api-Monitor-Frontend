@@ -29,7 +29,16 @@ const darkStyle: StyleState = {
     isDark: true
 }
 
-const initialState: StyleState = darkStyle;
+const getDarkSetting = () => {
+    const currentDark = localStorage.getItem("DARK");
+    switch (currentDark) {
+        case "false": return lightStyle;
+        case "true": return darkStyle;
+        default: return darkStyle;
+    }
+};
+
+const initialState: StyleState = getDarkSetting();
 
 export const styleSlice = createSlice({
     name: "style",
@@ -39,9 +48,11 @@ export const styleSlice = createSlice({
             if (state.isDark){
                 state.styles = lightStyle.styles;
                 state.isDark = false;
+                localStorage.setItem("DARK", "false");
             } else {
                 state.styles = darkStyle.styles;
                 state.isDark = true;
+                localStorage.setItem("DARK", "true");
             }
         }
     },

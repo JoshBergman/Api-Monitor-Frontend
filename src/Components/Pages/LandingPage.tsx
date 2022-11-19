@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styles from './LandingPage.module.css';
 import Card from '../UI/Resources/Card';
 import SelectUserCard from '../UI/Landing/SelectUserCard';
-import { toggleDark } from '../../Features/StyleSlice';
+import DarkMode from '../UI/Resources/DarkMode';
 
 export default function LandingPage() {
 
@@ -12,6 +12,7 @@ export default function LandingPage() {
 
   return (
     <React.Fragment>
+      <DarkMode />
       <Card>
           <React.Fragment>
               <h1>API Monitor</h1>
@@ -22,7 +23,6 @@ export default function LandingPage() {
         <SelectUserCard title="Guest" guest={true} message="Use local storage to save your API endpoint's" />
         <SelectUserCard title="Login As User" guest={false} message="Link your API endpoints to your account." />
       </div>
-      <button onClick={() => {dispatch(toggleDark())}}>Dark mode</button>
   </React.Fragment>
   )
 }

@@ -24,3 +24,18 @@
 
     margin: 0 auto;
 }
+
+.collapseButton {
+    background-color: transparent;
+    border-color: transparent;
+    margin-top: 20px;
+}
+
+.collapseArrow {
+    font-size: 25px;
+    transition: all 0.2s ease-in-out;
+}
+
+.collapseArrow:hover {
+    transform: translateY(-3px);
+}

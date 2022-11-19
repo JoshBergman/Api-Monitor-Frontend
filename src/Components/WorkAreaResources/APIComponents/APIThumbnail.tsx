@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 
 import styles from './APIThumbnail.module.css';
 import Button from '../../UI/Resources/Button';
@@ -9,9 +10,10 @@ interface ThumbnailProps {
     endpoint: string;
     type: string;
     method: string;
+    arrowColor: {color: string};
 }
 
-export default function APIThumbnail({title, endpoint, type, toggleThumbnail, method}:ThumbnailProps) {
+export default function APIThumbnail({title, endpoint, type, toggleThumbnail, method, arrowColor}:ThumbnailProps) {
   return (
     <div className={styles.masterContainer}>
         <div className={styles.leftContainer}>
@@ -23,7 +25,7 @@ export default function APIThumbnail({title, endpoint, type, toggleThumbnail, me
             <h2 className={styles.type}>{method}</h2>
         </div>
         <div className={styles.expandContainer}>
-            <Button onClick={toggleThumbnail}>Expand</Button>
+            <button className={styles.expandButton} onClick={toggleThumbnail}><IoIosArrowDown style={arrowColor} className={styles.expandArrow} /></button>
         </div>
     </div>
   )

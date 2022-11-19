@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { IoIosArrowUp } from 'react-icons/io';
 
 import styles from './API.module.css';
 import Button from '../../UI/Resources/Button';
 import APIThumbnail from './APIThumbnail';
+import { RootState } from '../../../App/Store';
 
 interface RESTProps {
     settings: {
@@ -70,9 +73,11 @@ export default function RESTAPI({settings}:RESTProps) {
         setIsThumbnail((prevState) => {return !prevState});
     };
 
+    const arrowColor = useSelector((state:RootState) => state.style.styles.textColor);
+
   return (
     <div className={styles.apiContainer}>
-        {isThumbnail && <APIThumbnail method={settings.method} title={settings.title} type="REST" endpoint={settings.endpoint} toggleThumbnail={thumbnailHandler} />}
+        {isThumbnail && <APIThumbnail arrowColor={arrowColor} method={settings.method} title={settings.title} type="REST" endpoint={settings.endpoint} toggleThumbnail={thumbnailHandler} />}
         {!isThumbnail &&
         <React.Fragment>
             <h1 className={styles.title}>{settings.title}</h1>
@@ -112,7 +117,7 @@ export default function RESTAPI({settings}:RESTProps) {
                 </ul>
             </div>
             <div className={styles.reqButton}>
-            <Button onClick={thumbnailHandler}>Collapse</Button>
+            <button className={styles.collapseButton} onClick={thumbnailHandler}><IoIosArrowUp style={arrowColor} className={styles.collapseArrow} /></button>
             </div>
         </React.Fragment>
         }
