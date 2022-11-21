@@ -19,8 +19,8 @@ export default function SelectUserCard({title, guest, message}:UserCardProps) {
             {guest && 
                 <React.Fragment>
                     <ul className={styles.list}>
-                        <li className={styles.listItem}>Save endpoint's in local storage</li>
-                        <li className={styles.listItem}>No Login Required</li>
+                        <li className={styles.listItem}>Local Storage</li>
+                        <li className={styles.listItem}>Up to 100 APIs</li>
                         <li className={styles.listItem}>Quick Setup</li>
                     </ul>
                     <Button to="/guest-home">
@@ -31,8 +31,8 @@ export default function SelectUserCard({title, guest, message}:UserCardProps) {
             {!guest &&
                 <React.Fragment>
                     <ul className={styles.list}>
-                        <li className={styles.listItem}>Save endpoint's under account</li>
-                        <li className={styles.listItem}>Login Required</li>
+                        <li className={styles.listItem}>Cloud Account</li>
+                        <li className={styles.listItem}>Up to 20 APIs</li>
                         <li className={styles.listItem}>Login Anywhere</li>
                     </ul>
                     <Button to="/login">

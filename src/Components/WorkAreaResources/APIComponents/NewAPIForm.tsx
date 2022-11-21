@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './NewAPIForm.module.css';
 import { addNewAPI, API, saveLocalStorage } from '../../../Features/APISlice';
 import { RootState } from '../../../App/Store';
+import NewBodyForm from './NewBodyForm';
 
 export default function NewAPIForm() {
 
@@ -15,6 +16,12 @@ export default function NewAPIForm() {
     const currMethod = useRef<any>();
 
     const [makingNew, setMakingNew] = useState(false);
+    const [includesBody, setIncludesBody] = useState(false);
+    const [currBody, setCurrBody] = useState();
+
+    const toggleBody = () => {
+        setIncludesBody((prevState) => {return !prevState;});
+    };
 
     const APITypeHandler = () => {
         console.log("Changed API Type");
@@ -37,6 +44,9 @@ export default function NewAPIForm() {
                 title: currTitle.current.value
             }
         };
+        if(includesBody) {
+            newAPI.settings.body = currBody;
+        }
 
         dispatch(addNewAPI(newAPI));
         dispatch(saveLocalStorage(currDark));
@@ -69,6 +79,14 @@ export default function NewAPIForm() {
                     <option className={styles.selectO}>GET</option>
                     <option className={styles.selectO}>POST</option>
                 </select>
+
+                <label className={styles.label}>Include Body
+                <input className={styles.checkBox} type="checkbox" onChange={toggleBody} />
+                </label>
+                {includesBody &&
+                    <NewBodyForm current={currBody} setCurr={setCurrBody} />
+                }
+                <Button onClick={() => {console.log(currBody)}}>Print</Button>
 
                 <div className={styles.buttonSpacer}><Button onClick={addAPI}>Save</Button></div>
                 <Button onClick={toggleFormHandler}>Cancel</Button>

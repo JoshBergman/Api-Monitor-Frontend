@@ -23,3 +23,24 @@
 .selectO {
     font-size: 16px;
 }
+
+.checkBox {
+    display: inline;
+}
+
+.bodyInput {
+    height: 200px;
+    font-size: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.bodyDiv {
+    width: 61%;
+    margin: 20px auto;
+    border: 1px solid;
+    height: fit-content;
+    max-height: 400px;
+    overflow-y: scroll;
+    text-align: left;
+}

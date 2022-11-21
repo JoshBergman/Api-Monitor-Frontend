@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IoIosArrowUp } from 'react-icons/io';
+import { FaTrash } from 'react-icons/fa';
 
 import styles from './API.module.css';
 import Button from '../../UI/Resources/Button';
@@ -27,14 +28,20 @@ export default function RESTAPI({settings}:RESTProps) {
 
     let response: any;
     let raw: any;
+    
     const onAPICall = async () => {
+        const fetchSettings: any = {
+            method: settings.method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        if(settings.body){
+            fetchSettings.body = JSON.stringify(settings.body);
+        }
         response = 
-            await fetch(settings.endpoint, {
-                method: settings.method,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then((response) => {
+            await fetch(settings.endpoint, fetchSettings
+                ).then((response) => {
                 raw = response;
                 return response.json();}
                 ).catch((error) => {
@@ -96,14 +103,13 @@ export default function RESTAPI({settings}:RESTProps) {
             <div className={styles.currSettings}>
                 <ul>
                     <li>Method: {settings.method}</li>
-                    <li>Mode: CORS</li>
                     <li>Headers: 
                         <ul>
                             <li>Content-Type: application/json</li>
                         </ul>
                     </li>
                     {settings.body &&
-                    <li>Body: JSON.stringify({unnestObject(settings.body)})</li>
+                    <li>Body: JSON.stringify(<ul>{unnestObject(settings.body)}</ul>)</li>
                     }
                 </ul>
             </div>
@@ -121,7 +127,7 @@ export default function RESTAPI({settings}:RESTProps) {
                     {unnestObject( currReponse )}
                 </ul>
             </div>
-            <button onClick={() => {dispatch(delAPI(settings.title)); dispatch(saveLocalStorage(currDark));}}>Delete Me!</button>
+            <button className={styles.trashButton} onClick={() => {dispatch(delAPI(settings.title)); dispatch(saveLocalStorage(currDark));}}><FaTrash className={styles.trashCan} /></button>
             <div className={styles.reqButton}>
             <button className={styles.collapseButton} onClick={thumbnailHandler}><IoIosArrowUp style={arrowColor} className={styles.collapseArrow} /></button>
             </div>

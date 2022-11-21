@@ -6,6 +6,7 @@ export interface API {
             endpoint: string;
             method: string;
             title: string;
+            body?: string | object;
         }
 }
 
@@ -14,8 +15,8 @@ interface APIState {
 }
 
 //function to go through local storage string for API's and break it down into array (Helper function to getFromStorage())
-const parseSettings = (currString: string) => {
-    const currSettings = []; //title, method, endpoint
+const parseSettings = (currString: string, currNum: string) => {
+    const currSettings = []; //title, method, endpoint, body?
     const markers = [];
 
     for(let i = 0; i < currString.length; i++){
@@ -26,6 +27,13 @@ const parseSettings = (currString: string) => {
     currSettings.push(currString.slice(0, markers[0]));
     currSettings.push(currString.slice(markers[0] + 1, markers[1]));
     currSettings.push(currString.slice(markers[1] + 1));
+
+    //push body if contained
+    const currBody = localStorage.getItem("^" + currNum);
+    if(currBody !== null){
+        currSettings.push(JSON.parse(currBody));
+    }
+    
     return currSettings;
 };
 
@@ -40,7 +48,7 @@ const getFromStorage = () => {
     while(searching) {
         const currKey = localStorage.key(i);
         if(currKey) {
-            if(currKey === "DARK"){
+            if(currKey === "DARK" || currKey[0] === "^"){
             } else {
                 keys.push(currKey);
             }
@@ -58,10 +66,9 @@ const getFromStorage = () => {
     keys.forEach((currKey) => {
         let currString: string | null = localStorage.getItem(currKey);
         if (currString === null){return}
-        const currSettings = parseSettings(currString); //returns [title, method, endpoint]
-
-        currAPIS["APIs"].push(
-            {
+        const thisNum = currKey.slice(currKey.indexOf("+") + 1);
+        const currSettings = parseSettings(currString, thisNum); //returns [title, method, endpoint]
+        const thisAPI: API = {
             type: currKey.slice(0, currKey.indexOf('+')),
             settings: {
                 endpoint: currSettings[2],
@@ -69,7 +76,11 @@ const getFromStorage = () => {
                 method: currSettings[1]
             }
             }
-        );
+        //if a body was included then add the body
+        if (currSettings.length > 3) {
+            thisAPI.settings.body = currSettings[3];
+        }
+        currAPIS["APIs"].push(thisAPI);
     });
     return currAPIS;
 };
@@ -122,6 +133,10 @@ export const APISlice = createSlice({
                 i++;
                 const apiKeyString =  api.settings.title + '+' + api.settings.method + '+' + api.settings.endpoint;
                 localStorage.setItem(api.type + '+' + i, apiKeyString);
+
+                if(api.settings.body){
+                    localStorage.setItem("^" + i, JSON.stringify(api.settings.body));
+                }
             });
         },
     },
