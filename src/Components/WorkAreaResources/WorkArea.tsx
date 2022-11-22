@@ -18,6 +18,7 @@ export default function WorkArea() {
             i++;
             switch (API.type){
                 case "REST": return <APICard key={i} type="REST" APISettings={API.settings} />;
+                case "GRAPHQL": return <APICard key={i} type="GRAPHQL" APISettings={API.settings} />;
             
                 default: return -1;
             }

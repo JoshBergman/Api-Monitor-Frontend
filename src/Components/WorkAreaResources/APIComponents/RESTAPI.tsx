@@ -127,7 +127,7 @@ export default function RESTAPI({settings}:RESTProps) {
                     {unnestObject( currReponse )}
                 </ul>
             </div>
-            <button className={styles.trashButton} onClick={() => {dispatch(delAPI(settings.title)); dispatch(saveLocalStorage(currDark));}}><FaTrash className={styles.trashCan} /></button>
+            <button className={styles.trashButton} onClick={() => {dispatch(delAPI(settings.title)); dispatch(saveLocalStorage(currDark)); thumbnailHandler();}}><FaTrash className={styles.trashCan} /></button>
             <div className={styles.reqButton}>
             <button className={styles.collapseButton} onClick={thumbnailHandler}><IoIosArrowUp style={arrowColor} className={styles.collapseArrow} /></button>
             </div>

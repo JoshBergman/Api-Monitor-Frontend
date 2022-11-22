@@ -7,6 +7,7 @@ import styles from './NewAPIForm.module.css';
 import { addNewAPI, API, saveLocalStorage } from '../../../Features/APISlice';
 import { RootState } from '../../../App/Store';
 import NewBodyForm from './NewBodyForm';
+import NewQueryForm from './NewQueryForm';
 
 export default function NewAPIForm() {
 
@@ -17,18 +18,32 @@ export default function NewAPIForm() {
 
     const [makingNew, setMakingNew] = useState(false);
     const [includesBody, setIncludesBody] = useState(false);
-    const [currBody, setCurrBody] = useState();
+    const [currBody, setCurrBody] = useState<any>();
+    const [isGraphQL, setIsGraphQL] = useState(false);
+    const [useObjSyntax, setUseObjSyntax] = useState(false);
 
     const toggleBody = () => {
         setIncludesBody((prevState) => {return !prevState;});
     };
 
-    const APITypeHandler = () => {
-        console.log("Changed API Type");
+    const toggleUseObj = () => {
+        setUseObjSyntax((prevState) => {return !prevState});
     };
 
-    const toggleFormHandler = () => {
-        setMakingNew((prevState) => {return !prevState});
+    const resetState = () => {
+        setMakingNew(false);
+        setIncludesBody(false);
+        setIsGraphQL(false);
+        setUseObjSyntax(false);
+        setCurrBody('');
+    };
+
+    const APITypeHandler = () => {
+        if(currType.current.value === "REST"){
+            setIsGraphQL(false);
+        } else if (currType.current.value === "GRAPHQL"){
+            setIsGraphQL(true);
+        }
     };
 
     const currDark = useSelector((state: RootState) => state.style.isDark);
@@ -44,19 +59,19 @@ export default function NewAPIForm() {
                 title: currTitle.current.value
             }
         };
-        if(includesBody) {
+        if(includesBody || isGraphQL) {
             newAPI.settings.body = currBody;
         }
 
         dispatch(addNewAPI(newAPI));
         dispatch(saveLocalStorage(currDark));
-        toggleFormHandler();
+        resetState();
     };
 
     return (
     <Card height="fit-content" width="90%">
         <React.Fragment>
-            {!makingNew && <Button onClick={toggleFormHandler} >Register New API</Button>}
+            {!makingNew && <Button onClick={() => {setMakingNew(true);}} >Register New API</Button>}
         
             {makingNew &&
             <React.Fragment>
@@ -74,22 +89,44 @@ export default function NewAPIForm() {
                     <option className={styles.selectO}>GRAPHQL</option>
                 </select>
 
-                <label className={styles.label}>REST Method: </label>
-                <select ref={currMethod} className={styles.select}>
-                    <option className={styles.selectO}>GET</option>
+                <label className={styles.label}>Action: </label>
+                <select defaultValue="GET" ref={currMethod} className={styles.select}>
                     <option className={styles.selectO}>POST</option>
+                    {!isGraphQL && <option className={styles.selectO}>GET</option> }
                 </select>
 
-                <label className={styles.label}>Include Body
-                <input className={styles.checkBox} type="checkbox" onChange={toggleBody} />
-                </label>
-                {includesBody &&
-                    <NewBodyForm current={currBody} setCurr={setCurrBody} />
+                {!isGraphQL &&
+                <React.Fragment>
+                    <label className={styles.label}>Include Body
+                        <input className={styles.checkBox} type="checkbox" onChange={toggleBody} />
+                    </label>
+                    {includesBody &&
+                        <NewBodyForm current={currBody} setCurr={setCurrBody} />
+                    }
+                </React.Fragment>
                 }
-                <Button onClick={() => {console.log(currBody)}}>Print</Button>
+                {isGraphQL && 
+                <React.Fragment>
+                    <label className={styles.label}>Use Object Syntax:
+                    <input className={styles.checkBox} type="checkbox" onChange={toggleUseObj} />
+                    </label>
+                    {useObjSyntax && 
+                    <React.Fragment>
+                        <label className={styles.label}>Query Object:</label>
+                        <NewBodyForm current={currBody} setCurr={setCurrBody} />
+                    </React.Fragment>
+                    }
+                    {!useObjSyntax && 
+                    <React.Fragment>
+                        <label className={styles.label}>Query:</label>
+                        <NewQueryForm current={currBody} setCurr={setCurrBody} />
+                    </React.Fragment>
+                    }
+                </React.Fragment>
+                }
 
                 <div className={styles.buttonSpacer}><Button onClick={addAPI}>Save</Button></div>
-                <Button onClick={toggleFormHandler}>Cancel</Button>
+                <Button onClick={() => {resetState();}}>Cancel</Button>
             </React.Fragment>
             }
         </React.Fragment>

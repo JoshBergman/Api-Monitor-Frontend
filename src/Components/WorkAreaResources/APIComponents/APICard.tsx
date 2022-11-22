@@ -10,6 +10,7 @@ interface APIProps {
     endpoint: string;
     method: string;
     title: string;
+    body?: object | string;
   };
 }
 
@@ -21,7 +22,7 @@ export default function APICard({type, APISettings}:APIProps) {
     <Card width="90%" height="fit-content" >
       <React.Fragment>
         { type === "REST" && <RESTAPI settings={APISettings} /> }
-        { type === "GRAPHQL" && <GRAPHQLAPI /> }
+        { type === "GRAPHQL" && <GRAPHQLAPI settings={APISettings} /> }
       </React.Fragment>
     </Card>
   );

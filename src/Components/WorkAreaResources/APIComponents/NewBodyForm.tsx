@@ -42,7 +42,10 @@ export default function NewBodyForm({current, setCurr}:any) {
                 i++;
             }
             else if(str[i] === '}'){
-                thisObj[currKey] = currItem.trim();
+                if(wasObj){
+
+                } else{
+                thisObj[currKey] = currItem.trim(); }
             }
             else {
                 currItem += str[i];
@@ -55,6 +58,7 @@ export default function NewBodyForm({current, setCurr}:any) {
     const changeHandler = () => {
         try {
             currBody = unStringObject(bodyRef.current.value);
+            console.log(currBody);
             setCurr(currBody);
         } catch (err) {
 

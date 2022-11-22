@@ -33,6 +33,11 @@ const parseSettings = (currString: string, currNum: string) => {
     if(currBody !== null){
         currSettings.push(JSON.parse(currBody));
     }
+    //push query if contained
+    const currQuery = localStorage.getItem("^^" + currNum);
+    if(currQuery !== null){
+        currSettings.push(currQuery);
+    }
     
     return currSettings;
 };
@@ -103,6 +108,24 @@ const defaultValues: APIState = {
             title: "Vehicle 14"
         }
     },
+    {
+        type: "GRAPHQL",
+        settings: {
+            endpoint: "GRAPHQL/OBJ",
+            method: "POST",
+            title: "GRAPH OBJ",
+            body: {value: "twenty", nested: {this: "nested"}}
+        }
+    },
+    {
+        type: "GRAPHQL",
+        settings: {
+            endpoint: "GRAPHQL/QUERY",
+            method: "POST",
+            title: "GRAPH QUERY",
+            body: "query{user{id,name,job}}"
+        }
+    },
     ]
 };
 
@@ -129,13 +152,19 @@ export const APISlice = createSlice({
             localStorage.clear(); // clear storage, set dark mode, then populate with current api's
             localStorage.setItem("DARK", '' + action.payload);
             let i = 0;
+            state.APIs.forEach((api) => {console.log(api.settings)}); //DEBUGG
             state.APIs.forEach((api) => {
                 i++;
                 const apiKeyString =  api.settings.title + '+' + api.settings.method + '+' + api.settings.endpoint;
                 localStorage.setItem(api.type + '+' + i, apiKeyString);
 
                 if(api.settings.body){
-                    localStorage.setItem("^" + i, JSON.stringify(api.settings.body));
+                    if(api.type === "REST" || typeof api.settings.body === 'object'){
+                        localStorage.setItem("^" + i, JSON.stringify(api.settings.body));
+                    }
+                    else if (api.type === "GRAPHQL" && typeof api.settings.body === "string"){
+                        localStorage.setItem('^^' + i, "" + api.settings.body);
+                    }
                 }
             });
         },
