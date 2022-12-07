@@ -1,0 +1,19 @@
+.navContainer {
+    float: right;
+    margin-top: 60px;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.link {
+    margin: 20px;
+
+    text-decoration: none;
+    font-size: 30px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
