@@ -7,6 +7,8 @@ import { RootState } from './App/Store';
 import Header from './Components/UI/GUI/Header/Header';
 import GuestPage from './Components/Pages/GuestPage';
 import LandingPage from './Components/Pages/LandingPage';
+import Login from './Components/Pages/Login';
+import Signup from './Components/Pages/Signup';
 
 //todo get loading spinner for suspense fallback
 
@@ -26,6 +28,14 @@ function App() {
             <Route 
             path="/guest-home" 
             element={<GuestPage />}
+            />
+            <Route 
+            path="/login" 
+            element={<Login />}
+            />
+            <Route 
+            path="/signup" 
+            element={<Signup />}
             />
             <Route
             path="*"

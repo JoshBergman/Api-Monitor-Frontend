@@ -1,0 +1,27 @@
+.title {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.label {
+    display: block;
+}
+
+.input {
+    height: 20px;
+    width: 400px;
+}
+
+.inputContainer {
+    width: fit-content;
+    height: fit-content;
+    
+    margin: 20px auto;
+}
+
+@media (max-width: 420px){
+    .input {
+        width: 200px;
+    }
+}

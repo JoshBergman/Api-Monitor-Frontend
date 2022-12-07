@@ -7,7 +7,7 @@ export interface Style {
     pageBackground: {backgroundColor: string},
 }
 
-interface StyleState {
+export interface StyleState {
     styles: Style,
     isDark: boolean;
 }
