@@ -6,6 +6,15 @@
     height: fit-content;
 }
 
+.mobileNavContainer {
+    float: right;
+    margin-top: 18px;
+    margin-right: 10px;
+
+    width: fit-content;
+    height: fit-content;
+}
+
 .link {
     margin: 20px;
 
@@ -16,4 +25,16 @@
 
 .link:hover {
     text-decoration: underline;
+}
+
+.hamburger {
+    font-size: 60px;
+    transition: all 0.2s ease-in-out;
+}
+
+.hamButton {
+    border-color: transparent;
+    background-color: transparent;
+    width: fit-content;
+    height: fit-content;
 }

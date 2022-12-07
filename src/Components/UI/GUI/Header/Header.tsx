@@ -33,12 +33,12 @@ export default function Header() {
   return (
     <React.Fragment>
     <div className={styles.mainHeaderContainer} style={currStyle.mainBackground}>
-            {!isMobile && <div className={styles.darkButtonContainer}><DarkMode /></div>}
+        {!isMobile && <div className={styles.textContainer}><h1 className={styles.monitor} style={currStyle.textColor}>API Monitor</h1></div>}
+        {!isMobile && <div className={styles.darkButtonContainer}><DarkMode /></div>}
         <div className={styles.contentContainer}>
             <div className={styles.imgContainer}><Link to="/welcome"><img src={logoPic} className={styles.img} alt="logo"/></Link></div>
             {!isMobile && <NormalNavigation currStyle={currStyle} />}
             {isMobile && <MobileNavigation currStyle={currStyle} />}
-            
         </div>
     </div>
     <div className={styles.headerSpacer} />
