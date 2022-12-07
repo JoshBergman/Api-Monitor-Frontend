@@ -1,18 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
 
 import styles from './LandingPage.module.css';
 import Card from '../UI/Resources/Card';
 import SelectUserCard from '../UI/Landing/SelectUserCard';
-import DarkMode from '../UI/Resources/DarkMode';
 
 export default function LandingPage() {
 
-  const dispatch = useDispatch();
-
   return (
     <React.Fragment>
-      <DarkMode />
       <Card>
           <React.Fragment>
               <h1>API Monitor</h1>

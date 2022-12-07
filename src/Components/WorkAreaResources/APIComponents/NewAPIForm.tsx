@@ -91,8 +91,20 @@ export default function NewAPIForm() {
 
                 <label className={styles.label}>Action: </label>
                 <select defaultValue="GET" ref={currMethod} className={styles.select}>
-                    <option className={styles.selectO}>POST</option>
-                    {!isGraphQL && <option className={styles.selectO}>GET</option> }
+                    {isGraphQL && <option className={styles.selectO}>POST</option>}
+                    {!isGraphQL &&
+                    <React.Fragment>
+                        <option className={styles.selectO}>GET</option> 
+                        <option className={styles.selectO}>HEAD</option>
+                        <option className={styles.selectO}>POST</option>
+                        <option className={styles.selectO}>PUT</option>
+                        <option className={styles.selectO}>DELETE</option>
+                        <option className={styles.selectO}>CONNECT</option>
+                        <option className={styles.selectO}>OPTIONS</option>
+                        <option className={styles.selectO}>TRACE</option>
+                        <option className={styles.selectO}>PATCH</option>
+                    </React.Fragment>
+                    }
                 </select>
 
                 {!isGraphQL &&
@@ -124,7 +136,6 @@ export default function NewAPIForm() {
                     }
                 </React.Fragment>
                 }
-
                 <div className={styles.buttonSpacer}><Button onClick={addAPI}>Save</Button></div>
                 <Button onClick={() => {resetState();}}>Cancel</Button>
             </React.Fragment>

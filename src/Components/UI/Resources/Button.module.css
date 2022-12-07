@@ -23,9 +23,14 @@
     height: fit-content;
 
     border-color: transparent;
+    display: inline-block;
+}
+
+.darkButton:hover {
+    cursor: pointer;
 }
 
 .darkIcon {
     transition: all 0.35s ease-in-out;
-    font-size: 60px;
+    font-size: 54px;
 }

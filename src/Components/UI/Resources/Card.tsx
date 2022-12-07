@@ -22,13 +22,13 @@ export default function Card(props: Props) {
     const style = useSelector((state: RootState) => state.style.styles);
 
     let combinedStyle: StyleObject = {
-        ...style.mainBackground,
+        ...style.mutedBackground,
         ...style.textColor,
     }
 
     if(props.width && props.height){
         combinedStyle = {
-            ...style.mainBackground,
+            ...style.mutedBackground,
             ...style.textColor,
             width: props.width,
             height: props.height,

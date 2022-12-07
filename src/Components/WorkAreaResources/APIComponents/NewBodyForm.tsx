@@ -91,6 +91,7 @@ export default function NewBodyForm({current, setCurr}:any) {
         {
             Nested : Object
         }}" onChange={changeHandler} />
+    <label className={styles.label}>Current Body:</label>
     <div className={styles.bodyDiv}>
         <ul>
             {unnestObject(current)}

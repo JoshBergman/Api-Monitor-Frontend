@@ -1,21 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface Style {
+export interface Style {
     mainBackground: {backgroundColor: string},
     mutedBackground: {backgroundColor: string},
     textColor: {color: string},
+    pageBackground: {backgroundColor: string},
 }
 
 interface StyleState {
     styles: Style,
     isDark: boolean;
 }
-
+    
 const lightStyle: StyleState = {
     styles: {
-        mainBackground: {backgroundColor: "white"},
-        mutedBackground: {backgroundColor: "gray"},
-        textColor: {color: "black"}
+        mainBackground: {backgroundColor: "#EFEFEF"},
+        mutedBackground: {backgroundColor: "#E1E1E1"},
+        textColor: {color: "black"},
+        pageBackground: {backgroundColor: "#D3D3D3"},
     },
     isDark: false
 }
@@ -23,8 +25,9 @@ const lightStyle: StyleState = {
 const darkStyle: StyleState = {
     styles: {
         mainBackground: {backgroundColor: "black"},
-        mutedBackground: {backgroundColor: "gray"},
-        textColor: {color: "white"}
+        mutedBackground: {backgroundColor: "#494949"},
+        textColor: {color: "white"},
+        pageBackground: {backgroundColor: "#292929"},
     },
     isDark: true
 }

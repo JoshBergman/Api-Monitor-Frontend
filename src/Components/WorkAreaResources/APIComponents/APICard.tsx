@@ -23,6 +23,11 @@ export default function APICard({type, APISettings}:APIProps) {
       <React.Fragment>
         { type === "REST" && <RESTAPI settings={APISettings} /> }
         { type === "GRAPHQL" && <GRAPHQLAPI settings={APISettings} /> }
+        { type !== "REST" && type !== "GRAPHQL" && <RESTAPI settings={{
+        endpoint: APISettings.endpoint,
+        method: "Error!",
+        title: APISettings.title,
+    }} /> }
       </React.Fragment>
     </Card>
   );
