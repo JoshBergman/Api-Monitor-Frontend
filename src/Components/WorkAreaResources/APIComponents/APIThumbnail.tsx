@@ -2,7 +2,6 @@ import React from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
 import styles from './APIThumbnail.module.css';
-import Button from '../../UI/Resources/Button';
 
 interface ThumbnailProps {
     toggleThumbnail: () => void;
