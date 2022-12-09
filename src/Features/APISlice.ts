@@ -47,6 +47,6 @@ export const APISlice = createSlice({
     },
 });
 
-export const { delAPI, addNewAPI, saveLocalStorage } = APISlice.actions //export actions
+export const { delAPI, addNewAPI, saveLocalStorage } = APISlice.actions
 
 export default APISlice.reducer;
