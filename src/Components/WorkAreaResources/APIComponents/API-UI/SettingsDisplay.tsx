@@ -21,17 +21,12 @@ export default function SettingsDisplay({settings, headers}:SettingsProps) {
     <div className={styles.currSettings}>
         <ul>
             <li>Method: {settings.method}</li>
-            <li>Headers: 
-                <ul>
-                    <li>Content-Type: application/json</li>
-                </ul>
-            </li>
+            <HeadersDisplay headers={headers} />
         {settings.body &&
         <li>Body: JSON.stringify(<ul>{unnestObject(settings.body)}</ul>)</li>
         }
         </ul>
     </div>
-    <HeadersDisplay />
     </React.Fragment>
   )
 }

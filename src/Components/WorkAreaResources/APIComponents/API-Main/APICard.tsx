@@ -4,11 +4,11 @@ import { IoIosArrowUp } from 'react-icons/io';
 import { FaTrash } from 'react-icons/fa';
 
 import styles from './API.module.css';
-import { StyleState } from '../../../Features/StyleSlice';
-import { delAPI, saveLocalStorage } from '../../../Features/APISlice';
+import { StyleState } from '../../../../Features/StyleSlice';
+import { delAPI, saveLocalStorage } from '../../../../Features/APISlice';
 
-import Card from '../../UI/Resources/Card';
-import APIThumbnail from './APIThumbnail';
+import Card from '../../../UI/Resources/Card';
+import APIThumbnail from '../API-UI/APIThumbnail';
 import RESTAPI from './RESTAPI';
 import GRAPHQLAPI from './GRAPHQLAPI';
 
@@ -21,11 +21,11 @@ interface APIProps {
     title: string;
     body?: object | string;
   };
-  headers?: any;
+  headers: any;
   styleState: StyleState;
 }
 
-export default function APICard({type, APISettings, styleState}:APIProps) {
+export default function APICard({type, APISettings, styleState, headers}:APIProps) {
   const dispatch = useDispatch();
   
   const [isThumbnail, setIsThumbnail] = useState(true);
@@ -47,15 +47,19 @@ export default function APICard({type, APISettings, styleState}:APIProps) {
   const renderAPI = (type:string) => {
     switch (type) {
 
-      case "REST": return <RESTAPI settings={APISettings} />;
-      case "GRAPHQL": return <RESTAPI settings={APISettings} />;
-      case "Error": return <RESTAPI settings={{
+      case "REST": return <RESTAPI settings={APISettings} headers={headers}/>;
+      case "GRAPHQL": return <RESTAPI settings={APISettings} headers={headers} />;
+      case "Error": return <RESTAPI 
+      headers={headers}
+      settings={{
         endpoint: APISettings.endpoint,
         method: "Error!",
         title: APISettings.title,
     }} />;
 
-      default: return <RESTAPI settings={{
+      default: return <RESTAPI 
+      headers={headers}
+      settings={{
         endpoint: APISettings.endpoint,
         method: "Worse Error!",
         title: APISettings.title,

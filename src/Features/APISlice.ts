@@ -16,7 +16,7 @@ export interface settings {
     body?: string | object;
 }
 
-interface Headers {
+export interface Headers {
     [key: string]: string | number | boolean;
 }
 
@@ -28,8 +28,8 @@ export const APISlice = createSlice({
     name: "API",
     initialState: getLocalStorage(), // './APILogic/getLocalStorage'
     reducers: {
-        addNewAPI: (state, action) => {
-            state.APIs.push(action.payload); //payload must be a APIState object
+        addNewAPI: (state, action) => { //follow-up with a savelocalstorage call
+            state.APIs.push(action.payload); //payload must be a API type
         },
         delAPI: (state, action) => {
             state.APIs = (
@@ -41,12 +41,13 @@ export const APISlice = createSlice({
                 }
             }));
         },
-        saveLocalStorage: (state, action) => {
+        saveLocalStorage: (state, action) => { //follow-up with a savelocalstorage call
+            //action payload expects current dark value
             saveToLocalStorage(state, action.payload); // './APILogic/saveToLocalStorage'
         },
     },
 });
 
-export const { delAPI, addNewAPI, saveLocalStorage } = APISlice.actions
+export const { delAPI, addNewAPI, saveLocalStorage } = APISlice.actions;
 
 export default APISlice.reducer;

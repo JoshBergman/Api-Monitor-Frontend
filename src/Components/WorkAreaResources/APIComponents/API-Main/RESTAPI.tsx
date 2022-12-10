@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import styles from './API.module.css';
-import { unnestObject } from '../Helpers/Unnester';
-import Button from '../../UI/Resources/Button';
-import SettingsDisplay from './API-UI/SettingsDisplay';
-import APITitle from './API-UI/APITitle';
+import { unnestObject } from '../../Helpers/Unnester';
+import Button from '../../../UI/Resources/Button';
+import SettingsDisplay from '../API-UI/SettingsDisplay';
+import APITitle from '../API-UI/APITitle';
 
 interface RESTProps {
     settings: {
@@ -12,10 +12,11 @@ interface RESTProps {
         endpoint: string;
         method: string;
         body?: string | object;
-    }
+    },
+    headers: any;
 }
 
-export default function RESTAPI({settings}:RESTProps) {
+export default function RESTAPI({settings, headers}:RESTProps) {
     const [currRaw, setCurrRaw] = useState({Header: "Headers"});
     const [loading, setLoading] = useState(false);
     const [currReponse, setResponse] = useState({"API" : "Response Body"});
@@ -28,21 +29,33 @@ export default function RESTAPI({settings}:RESTProps) {
         onAPICall();
     };
 
+    const defaultHeaders = {
+        'Content-Type' : 'application/json'
+    };
+
+    let appliedHeaders = {};
+
+    if(headers.useDefault === true){
+        appliedHeaders = defaultHeaders;
+    } else {
+        appliedHeaders = headers;
+    }
+
     const onAPICall = async () => {
         const fetchSettings: any = {
             method: settings.method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: appliedHeaders,
         };
         if(settings.body){
             fetchSettings.body = JSON.stringify(settings.body);
         }
+
         response = 
             await fetch(settings.endpoint, fetchSettings
                 ).then((response) => {
                 raw = response;
-                return response.json();}
+                return response.json();
+                }
                 ).catch((error) => {
                 return {"FATAL-ERROR": error, "CODE" : raw.status}
                 }
@@ -62,7 +75,7 @@ export default function RESTAPI({settings}:RESTProps) {
             {!loading && <Button onClick={requestHandler}>Make Req</Button>}
             {loading && <Button>LOADING</Button>}
         </div>
-        <SettingsDisplay settings={settings} headers={{}}/>
+        <SettingsDisplay settings={settings} headers={{headers}}/>
 
         <div className={styles.infoDiv}>
         </div>

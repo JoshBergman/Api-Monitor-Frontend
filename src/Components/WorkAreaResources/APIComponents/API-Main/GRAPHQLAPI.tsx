@@ -4,11 +4,11 @@ import { IoIosArrowUp } from 'react-icons/io';
 import { FaTrash } from 'react-icons/fa';
 
 import styles from './API.module.css';
-import Button from '../../UI/Resources/Button';
-import APIThumbnail from './APIThumbnail';
-import { RootState } from '../../../App/Store';
-import { delAPI, saveLocalStorage } from '../../../Features/APISlice';
-import { unnestObject } from '../Helpers/Unnester';
+import Button from '../../../UI/Resources/Button';
+import APIThumbnail from '../API-UI/APIThumbnail';
+import { RootState } from '../../../../App/Store';
+import { delAPI, saveLocalStorage } from '../../../../Features/APISlice';
+import { unnestObject } from '../../Helpers/Unnester';
 
 interface GRAPHProps {
     settings: {
