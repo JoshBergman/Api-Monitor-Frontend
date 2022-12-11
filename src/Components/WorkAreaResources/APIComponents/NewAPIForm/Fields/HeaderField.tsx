@@ -21,7 +21,8 @@ export default function HeaderField({headerManage}:headerProps) {
     const changeHandler = () => {
         try {
             currBody = unStringObject(bodyRef.current.value); //'../../Helpers/Unstringer';
-            headerManage.setCurrHeaders(currBody);
+            const combined = { ...currBody, ...{useDefault: false}};
+            headerManage.setCurrHeaders(combined);
         } catch (err) {
 
         }

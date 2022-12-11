@@ -75,7 +75,7 @@ export default function RESTAPI({settings, headers}:RESTProps) {
             {!loading && <Button onClick={requestHandler}>Make Req</Button>}
             {loading && <Button>LOADING</Button>}
         </div>
-        <SettingsDisplay settings={settings} headers={{headers}}/>
+        <SettingsDisplay settings={settings} headers={{headers}} isObj={true} />
 
         <div className={styles.infoDiv}>
         </div>

@@ -86,6 +86,8 @@ export default function NewAPIForm({styleState}:styleProps) {
         }
         if(includesHeader){
             newAPI.headers = currHeaders;
+        } else {
+            newAPI.headers = {useDefault: true};
         }
         dispatch(addNewAPI(newAPI));
         dispatch(saveLocalStorage(styleState.isDark))

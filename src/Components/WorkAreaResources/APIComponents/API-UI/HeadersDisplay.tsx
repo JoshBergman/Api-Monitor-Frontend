@@ -3,7 +3,12 @@ import React from 'react';
 import { unnestObject } from '../../Helpers/Unnester';
 
 export default function HeadersDisplay({headers}:any) {
-  const useDefault = headers.headers.useDefault;
+  let useDefault;
+  try {
+  useDefault = headers.headers.useDefault;
+  } catch (err) {
+  useDefault = true;
+  }
 
   return (
     <React.Fragment>

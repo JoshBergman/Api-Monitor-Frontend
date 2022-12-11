@@ -135,7 +135,10 @@ const defaultValues: APIState = {
             body: {value: "twenty", nested: {this: "nested"}}
         },
         headers: {
-            useDefault: true
+            useDefault: false,
+            "Content-Type": "appliation/json",
+            customHeader: "ThisIsTrue!",
+            Auth: "be2j0djJSLi3"
         }
     },
     {

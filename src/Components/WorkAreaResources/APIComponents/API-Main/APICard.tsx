@@ -48,7 +48,7 @@ export default function APICard({type, APISettings, styleState, headers}:APIProp
     switch (type) {
 
       case "REST": return <RESTAPI settings={APISettings} headers={headers}/>;
-      case "GRAPHQL": return <RESTAPI settings={APISettings} headers={headers} />;
+      case "GRAPHQL": return <GRAPHQLAPI settings={APISettings} headers={headers} />;
       case "Error": return <RESTAPI 
       headers={headers}
       settings={{
