@@ -19,5 +19,10 @@ export function saveToLocalStorage(state:APIState, payload:string | boolean):voi
                 localStorage.setItem('^^' + i, "" + api.settings.body);
             }
         }
+        if(api.headers){
+            if(api.headers["useDefault"] !== true){
+                localStorage.setItem("^^^" + i, JSON.stringify(api.headers));
+            }
+        }
     });
 }

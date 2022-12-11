@@ -1,4 +1,4 @@
-import { APIState, API, settings } from "../APISlice";
+import { APIState, API, settings, Headers } from "../APISlice";
 
 //! Add local storage keys here ignore | keys startings with "^" will automatically be ignored
 const ignoreKeys = ["DARK"];
@@ -22,20 +22,31 @@ export function getLocalStorage():APIState {
 
         //* add settings & body
         const settingsString: string = localStorage.getItem(thisKey) + '';
-        const settings:settings = parseSettings(settingsString, thisNum); //returns object API.settings
-        //parse headers
-        const pseudoHeaders = { useDefault: true };
+        const settings:settings = parseSettings(settingsString, thisNum);
+        const headers:Headers = parseHeaders(thisNum);
 
         const thisAPI:API = {
             type: thisType,
             settings: settings,
-            headers: pseudoHeaders
+            headers: headers
         };
+
         apiList.APIs.push(thisAPI);
     }
 
     return apiList;
 }
+
+
+//*Looks if headers are stored, if not sets them to {useDefault: true}
+const parseHeaders = (thisNum:number) => {
+    const response = localStorage.getItem("^^^" + thisNum);
+    if(response !== null){
+        return JSON.parse(response);
+    } else {
+        return { useDefault: true };
+    }
+};
 
 
 //*unpacks string into object for settings property of API list item
@@ -124,7 +135,10 @@ const defaultValues: APIState = {
             body: {value: "twenty", nested: {this: "nested"}}
         },
         headers: {
-            useDefault: true
+            useDefault: false,
+            "Content-Type": "appliation/json",
+            customHeader: "ThisIsTrue!",
+            Auth: "be2j0djJSLi3"
         }
     },
     {

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import styles from './NewAPIForm.module.css';
+import styles from '../NewAPIForm.module.css';
 
 
 export default function NewQueryForm({current, setCurr}:any) {
@@ -11,7 +11,6 @@ export default function NewQueryForm({current, setCurr}:any) {
     const changeHandler = () => {
         try {
             currBody = bodyRef.current.value;
-            console.log(currBody);
             setCurr(currBody);
         } catch (err) {
 
