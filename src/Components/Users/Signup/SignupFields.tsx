@@ -21,7 +21,7 @@ export default function SignupFields() {
                 <label className={styles.label}>Password:</label>
                 <input className={styles.input} type="password" autoComplete='current-password' />
             </div>
-            <Button onClick={submitHandler}>Log In</Button>
+            <Button onClick={submitHandler}>Create Account</Button>
         </form>
     </div>
   )
