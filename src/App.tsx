@@ -9,6 +9,7 @@ import GuestPage from './Components/Pages/GuestPage';
 import LandingPage from './Components/Pages/LandingPage';
 import Login from './Components/Pages/Login';
 import Signup from './Components/Pages/Signup';
+import ManageAccount from './Components/Pages/ManageAccount';
 
 //todo get loading spinner for suspense fallback
 
@@ -36,6 +37,10 @@ function App() {
             <Route 
             path="/signup" 
             element={<Signup />}
+            />
+            <Route 
+            path="/user/manage" 
+            element={<ManageAccount />}
             />
             <Route
             path="*"
