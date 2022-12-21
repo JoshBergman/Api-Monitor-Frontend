@@ -1,7 +1,8 @@
 import { APIState } from "../APISlice";
 
-export function saveToLocalStorage(state:APIState, payload:string | boolean):void {
-    localStorage.clear(); // clear storage, set dark mode, then populate with current api's
+export function saveToLocalStorage(state:APIState, payload:string | boolean):void { 
+    // clear storage, set dark mode, then populate with current api's
+    clearLocalStorageAndSaveSID();
     localStorage.setItem("DARK", '' + payload);
     
     let i = 0;
@@ -26,3 +27,12 @@ export function saveToLocalStorage(state:APIState, payload:string | boolean):voi
         }
     });
 }
+
+const clearLocalStorageAndSaveSID = () => {
+    const sidVal = localStorage.getItem("SID");
+    localStorage.clear();
+
+    if(sidVal !== null){
+        localStorage.setItem("SID", sidVal);
+    }
+};

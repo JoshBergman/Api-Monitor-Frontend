@@ -1,7 +1,7 @@
 import { APIState, API, settings, Headers } from "../APISlice";
 
 //! Add local storage keys here ignore | keys startings with "^" will automatically be ignored
-const ignoreKeys = ["DARK"];
+const ignoreKeys = ["DARK", "SID"];
 
 
 
@@ -102,7 +102,7 @@ const getAPIKeys = () => {
 
 
 //*default values if nothing is saved
-const defaultValues: APIState = {
+export const defaultValues: APIState = {
     APIs: [
         {
         type: "REST",

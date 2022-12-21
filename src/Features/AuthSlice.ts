@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { saveToLocalStorage } from './APILogic/saveToLocalStorage';
-
 interface AuthState {
     hasSID: boolean;
     sid?: string;
@@ -27,11 +25,14 @@ export const APISlice = createSlice({
     name: "Auth",
     initialState: initialState,
     reducers: {
-        addNewAPI: (state, action) => {},
-        saveLocalStorage: (state, action) => {},
+        logOut: (state) => {
+            localStorage.removeItem("SID");
+            state.hasSID = false;
+            state.sid = '';
+        },
     },
 });
 
-export const {addNewAPI, saveLocalStorage } = APISlice.actions;
+export const {logOut} = APISlice.actions;
 
 export default APISlice.reducer;

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getLocalStorage } from './APILogic/getLocalStorage';
+import { getLocalStorage, defaultValues } from './APILogic/getLocalStorage';
 import { saveToLocalStorage } from './APILogic/saveToLocalStorage';
 
 export interface API {
@@ -31,7 +31,7 @@ export const APISlice = createSlice({
         addNewAPI: (state, action) => { //follow-up with a savelocalstorage call
             state.APIs.push(action.payload); //payload must be a API type
         },
-        delAPI: (state, action) => {
+        delAPI: (state, action) => { //follow-up with a savelocalstorage call
             state.APIs = (
             state.APIs.filter((currAPI) => {
                 if(action.payload === currAPI.settings.title){
@@ -41,13 +41,15 @@ export const APISlice = createSlice({
                 }
             }));
         },
-        saveLocalStorage: (state, action) => { //follow-up with a savelocalstorage call
-            //action payload expects current dark value
+        resetAPI: (state) => { //follow-up with a savelocalstorage call
+            state.APIs = defaultValues.APIs;
+        },
+        saveLocalStorage: (state, action) => { //action payload expects current dark value
             saveToLocalStorage(state, action.payload); // './APILogic/saveToLocalStorage'
         },
     },
 });
 
-export const { delAPI, addNewAPI, saveLocalStorage } = APISlice.actions;
+export const { delAPI, addNewAPI, saveLocalStorage, resetAPI } = APISlice.actions;
 
 export default APISlice.reducer;
