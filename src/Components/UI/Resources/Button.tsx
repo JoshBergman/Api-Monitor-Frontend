@@ -6,7 +6,7 @@ import styles from './Button.module.css';
 interface Props {
     children: string | JSX.Element;
     to?: string;
-    onClick?: () => void;
+    onClick?: (event: any) => void | any;
 }
 
 export default function Button({children, to, onClick}:Props) {

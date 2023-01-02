@@ -3,7 +3,7 @@ interface backendConfig {
 };
 
 const settings: backendConfig = {
-    url: "http://localhost:5000/api/users/list/new/639b8dba05231c217286dfed"
+    url: "https://fierce-meadow-95090.herokuapp.com/api/users"
 };
 
 export default settings;

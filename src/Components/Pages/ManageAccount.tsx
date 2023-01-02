@@ -28,6 +28,7 @@ export default function ManageAccount() {
     const changePasswordHandler = () => {};
 
     const deleteAccountHandler = () => {};
+
   return (
     <Card>
             <React.Fragment>
@@ -36,6 +37,8 @@ export default function ManageAccount() {
                     <p>Sample</p>
                     <DoubleConfirmButton shortMessage='Log Out' message='Log Out' clickFunction={logOutHandler} />
                     <DoubleConfirmButton shortMessage="Reset API Endpoint's" message="Reset Endpoint's" clickFunction={resetAPIHandler} />
+                    <p>add change password here</p>
+                    <DoubleConfirmButton shortMessage='Delete Account' message='delete account and any linked information' clickFunction={deleteAccountHandler} />
                 </React.Fragment>
             }
             {!loggedIn && <p>Log In To View (link to login)</p>}

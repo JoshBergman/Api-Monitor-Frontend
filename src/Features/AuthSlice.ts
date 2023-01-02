@@ -30,6 +30,15 @@ export const APISlice = createSlice({
             state.hasSID = false;
             state.sid = '';
         },
+        deleteAccount: (state) => {
+            try {
+            localStorage.removeItem("SID");
+            state.hasSID = false;
+            state.sid = '';
+            } catch (err) {
+                
+            }
+        }
     },
 });
 
