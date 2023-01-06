@@ -41,6 +41,9 @@ export const APISlice = createSlice({
                 }
             }));
         },
+        setAPI: (state, action) => { //follow-up with a savelocalstorage call
+            state.APIs = action.payload;
+        },
         resetAPI: (state) => { //follow-up with a savelocalstorage call
             state.APIs = defaultValues.APIs;
         },
@@ -50,6 +53,6 @@ export const APISlice = createSlice({
     },
 });
 
-export const { delAPI, addNewAPI, saveLocalStorage, resetAPI } = APISlice.actions;
+export const { delAPI, addNewAPI, saveLocalStorage, resetAPI, setAPI } = APISlice.actions;
 
 export default APISlice.reducer;

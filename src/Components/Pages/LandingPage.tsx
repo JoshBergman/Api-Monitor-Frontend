@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import styles from './LandingPage.module.css';
 import Card from '../UI/Resources/Card';
 import SelectUserCard from '../UI/Landing/SelectUserCard';
+import { RootState } from '../../App/Store';
 
 export default function LandingPage() {
+  const isLoggedIn = useSelector((state:RootState) => state.Auth.hasSID);
 
   return (
     <React.Fragment>
@@ -16,10 +18,16 @@ export default function LandingPage() {
           </React.Fragment>
       </Card>
       <div className={styles.flexContainer}>
-        <SelectUserCard title="Guest" guest={true} message="Use local storage to save your API endpoint's." />
-        <SelectUserCard title="Login As User" guest={false} message="Link your API endpoints to your account." />
+        {!isLoggedIn &&
+        <React.Fragment>
+          <SelectUserCard title="Guest" guest={true} message="Use local storage to save your API endpoint's." />
+          <SelectUserCard title="Login As User" guest={false} message="Link your API endpoints to your account." />
+        </React.Fragment>
+        }
+        {isLoggedIn &&
+          <SelectUserCard title="Logged in as User" guest={false} message="Endpoint's linked to your account." log={isLoggedIn} />
+        }
       </div>
-      <Link to="/user/manage">MANAGE</Link>
   </React.Fragment>
   )
 }

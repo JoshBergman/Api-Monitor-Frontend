@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import styles from '../Shared/Auth.module.css';
 import { logIn } from '../../../Features/AuthSlice';
@@ -14,6 +15,7 @@ export default function SignupFields() {
     const [currError, setCurrError] = useState(false);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const emailChangeHandler = (action:any) => {
         setCurrEmail(action.target.value)
@@ -48,7 +50,7 @@ export default function SignupFields() {
 
         if(signupResponse.error === false){
             dispatch(logIn(signupResponse.sid))
-            //redirect to homepage
+            navigate('/work-area');
             return;
         } else {
             setCurrError(true);

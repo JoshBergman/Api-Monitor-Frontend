@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import styles from '../Shared/Auth.module.css';
 import { logIn } from '../../../Features/AuthSlice';
 import settings from '../../../App/Backend';
 import Button from '../../UI/Resources/Button';
 import Error from '../../UI/GUI/Error-Warning/Error';
+import { saveLocalStorage, setAPI } from '../../../Features/APISlice';
+import { RootState } from '../../../App/Store';
 
 export default function SignupFields() {
     const [currEmail, setCurrEmail] = useState('');
@@ -13,7 +16,9 @@ export default function SignupFields() {
     const [isLoading, setIsLoading] = useState(false);
     const [currError, setCurrError] = useState(false);
 
+    const currDark = useSelector((state:RootState) => state.style.isDark);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const emailChangeHandler = (action:any) => {
         setCurrEmail(action.target.value)
@@ -29,7 +34,7 @@ export default function SignupFields() {
         setIsLoading(true);
 
         //http req to create new id. Returns object {error: t/f, sid: account-SID}
-        const loginString = currEmail + "^" + currPassword;
+        const loginString = currEmail + "-mkr-" + currPassword;
         const signupResponse = await fetch(settings.url + "/login/" + loginString,{
             method: "GET",
             headers: {
@@ -45,8 +50,10 @@ export default function SignupFields() {
 
         if(signupResponse.error === false){
             dispatch(logIn(signupResponse.sid));
-            //populate APILIST (signupReponse.APILIST)
-            //redirect to homepage
+            const userAPIList = signupResponse.APILIST
+            dispatch(setAPI(userAPIList));
+            dispatch(saveLocalStorage(currDark));
+            navigate('/work-area');
             return;
         } else {
             setCurrError(true);

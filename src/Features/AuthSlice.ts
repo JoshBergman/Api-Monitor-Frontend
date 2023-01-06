@@ -35,8 +35,6 @@ export const APISlice = createSlice({
         },
         logIn: (state, action) => {
             const newSID = action.payload;
-            console.log(action.payload)
-            console.log(newSID);
 
             localStorage.setItem("SID", newSID);
             state.hasSID = true;

@@ -105,6 +105,9 @@ export default function ChangePassword({sid}:props) {
             setErrorMsg(changePasswordResponse.msg);
             throwButtonError();
         } else {
+            setOldPass('');
+            setNewPass('');
+            setConfirmPass('');
             setButtonMsg('Success');
             setButtonColor('green');
         }

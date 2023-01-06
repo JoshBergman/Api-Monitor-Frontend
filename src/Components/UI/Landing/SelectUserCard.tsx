@@ -8,9 +8,14 @@ interface UserCardProps {
     title: string;
     guest: boolean;
     message: string;
+    log?: boolean;
 }
 
-export default function SelectUserCard({title, guest, message}:UserCardProps) {
+export default function SelectUserCard({title, guest, message, log}:UserCardProps) {
+    let loggedIn = false;
+    if(log === true){
+        loggedIn = true;
+    }
     return (
     <Card height="fit-content" width="250px">
         <React.Fragment>
@@ -35,12 +40,21 @@ export default function SelectUserCard({title, guest, message}:UserCardProps) {
                         <li className={styles.listItem}>Up to 20 APIs</li>
                         <li className={styles.listItem}>Login Anywhere</li>
                     </ul>
-                    <Button to="/login">
-                        Login
-                    </Button>
-                    <Button to="/signup">
-                        Singup
-                    </Button>
+                    {loggedIn &&
+                        <Button to="/work-area">
+                            Continue As User
+                        </Button>
+                    }
+                    {!loggedIn &&
+                    <React.Fragment>
+                        <Button to="/login">
+                            Login
+                        </Button>
+                        <Button to="/signup">
+                            Singup
+                        </Button>
+                    </React.Fragment>
+                    }
                 </React.Fragment>
             }
         </React.Fragment>
