@@ -16,7 +16,7 @@ export default function LandingPage() {
           </React.Fragment>
       </Card>
       <div className={styles.flexContainer}>
-        <SelectUserCard title="Guest" guest={true} message="Use local storage to save your API endpoint's" />
+        <SelectUserCard title="Guest" guest={true} message="Use local storage to save your API endpoint's." />
         <SelectUserCard title="Login As User" guest={false} message="Link your API endpoints to your account." />
       </div>
       <Link to="/user/manage">MANAGE</Link>

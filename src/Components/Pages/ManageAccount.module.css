@@ -1,0 +1,50 @@
+.optionDiv {
+    height: fit-content;
+    width: 100%;
+
+    margin: 20px auto;
+    text-align: center;
+    border-bottom: 2px solid gray;
+}
+
+.buttonControl {
+    height: fit-content;
+    width: fit-content;
+
+    display: inline-block;
+    margin-right: auto;
+}
+
+.label {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.realLabel {
+    display: block;
+    margin-top: 10px;
+}
+
+.textInput {
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 60%;
+    display: block;
+}
+
+.eyeBall {
+    margin-bottom: -8px;
+    font-size: 30px;
+}
+
+.showTextBtn {
+    background-color: transparent;
+    border-color: transparent;
+    color: inherit;
+}
+
+.link {
+    color: inherit;
+}

@@ -12,16 +12,25 @@ interface Props {
 }
 
 export default function AuthPage({isLoginPage}:Props) {
-    const styleState = useSelector((state: RootState) => state.style);
+    const currState = useSelector((state: RootState) => state);
+    const styleState = currState.style;
+    
+    const isLoggedIn = currState.Auth.hasSID;
 
   return (
     <Card>
         <React.Fragment>
-            {isLoginPage && <LoginFields />}
-            {!isLoginPage && <SignupFields />}
+        {isLoggedIn && <p>Already Logged In</p>}
+        
+        {!isLoggedIn &&
+          <React.Fragment>
+              {isLoginPage && <LoginFields />}
+              {!isLoginPage && <SignupFields />}
 
-            {!isLoginPage && <p>Already have an account? <Link to="/login" style={styleState.styles.textColor}>Login</Link></p>}
-            {isLoginPage && <p>Don't have an accuont? <Link to="/signup" style={styleState.styles.textColor}>Sign-up</Link></p>}
+              {!isLoginPage && <p>Already have an account? <Link to="/login" style={styleState.styles.textColor}>Login</Link></p>}
+              {isLoginPage && <p>Don't have an accuont? <Link to="/signup" style={styleState.styles.textColor}>Sign-up</Link></p>}
+          </React.Fragment>
+        }
         </React.Fragment>
     </Card>
   );

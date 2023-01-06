@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Button from '../../../UI/Resources/Button';
-import Card from '../../../UI/Resources/Card'
-import { useDispatch } from 'react-redux';
+import Card from '../../../UI/Resources/Card';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './NewAPIForm.module.css';
 import { addNewAPI, saveLocalStorage, API, settings } from '../../../../Features/APISlice';
+import { addAPIToDB } from '../../../../Features/APILogic/addAPIToDB';
 import { StyleState } from '../../../../Features/StyleSlice';
 import TitleLabelField from './Fields/TitleLabelField';
 import BodyQueryManager from './Fields/BodyQueryManager';
 import HeaderField from './Fields/HeaderField';
 import { headerProps } from './Fields/HeaderField';
+import { RootState } from '../../../../App/Store';
 
 interface styleProps {
     styleState: StyleState;
   }
 
 export default function NewAPIForm({styleState}:styleProps) {
+    const authState = useSelector((state: RootState) => state.Auth);
 
     //manages fields
     const [makingNew, setMakingNew] = useState(false);
@@ -80,7 +83,7 @@ export default function NewAPIForm({styleState}:styleProps) {
             newAPISettings.body = currBody
         }
         
-        const newAPI:API = { //api to be added to redux
+        const newAPI:API = { //api to be added to APISlice
             type: currType,
             settings: newAPISettings,
         }
@@ -89,6 +92,8 @@ export default function NewAPIForm({styleState}:styleProps) {
         } else {
             newAPI.headers = {useDefault: true};
         }
+
+        if(authState.hasSID){addAPIToDB(authState.sid, newAPI)}
         dispatch(addNewAPI(newAPI));
         dispatch(saveLocalStorage(styleState.isDark))
         resetState();

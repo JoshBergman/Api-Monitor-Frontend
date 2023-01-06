@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IoIosArrowUp } from 'react-icons/io';
 import { FaTrash } from 'react-icons/fa';
 
 import styles from './API.module.css';
 import { StyleState } from '../../../../Features/StyleSlice';
-import { delAPI, saveLocalStorage } from '../../../../Features/APISlice';
 
 import Card from '../../../UI/Resources/Card';
 import APIThumbnail from '../API-UI/APIThumbnail';
 import RESTAPI from './RESTAPI';
 import GRAPHQLAPI from './GRAPHQLAPI';
+
+import { delAPI, saveLocalStorage } from '../../../../Features/APISlice';
+import { RootState } from '../../../../App/Store';
+import { rmAPIFromDB } from '../../../../Features/APILogic/addAPIToDB';
 
 
 interface APIProps {
@@ -26,6 +29,7 @@ interface APIProps {
 }
 
 export default function APICard({type, APISettings, styleState, headers}:APIProps) {
+  const authState = useSelector((state: RootState) => state.Auth);
   const dispatch = useDispatch();
   
   const [isThumbnail, setIsThumbnail] = useState(true);
@@ -37,8 +41,8 @@ export default function APICard({type, APISettings, styleState, headers}:APIProp
     setIsThumbnail(prevState => !prevState);
   };
 
-
   const deleteHandler = () => {
+    if(authState.hasSID){ rmAPIFromDB(authState.sid, APISettings.title); }
     dispatch(delAPI(APISettings.title)); 
     dispatch(saveLocalStorage(currDark)); 
     toggleThumbnail();

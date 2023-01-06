@@ -7,10 +7,15 @@ import Card from '../Resources/Card';
 interface Props {
     shortMessage: string;
     message: string;
+    color?: string;
     clickFunction: () => void;
 }
 
-export default function DoubleConfirmButton({shortMessage, message, clickFunction}:Props) {
+export default function DoubleConfirmButton({shortMessage, message, clickFunction, color}:Props) {
+    let specialColor = '';
+    if(color){
+        specialColor = color;
+    }
 
     const [showingConfirmModal, setShowingConfirmModal] = useState(false);
 
@@ -28,17 +33,17 @@ export default function DoubleConfirmButton({shortMessage, message, clickFunctio
     {showingConfirmModal &&
         <div className={styles.modalDiv}>
             <div className={styles.cardSpacer} />
-            <Card>
+            <Card width='280px' height="fit-content">
                 <React.Fragment>
-                    <h3>{"Are you sure you would like to " + message}</h3>
-                    <Button onClick={confirmHandler}>{shortMessage}</Button>
+                    <h3>{"Are you sure you would like to " + message + "?"}</h3>
+                    <Button color={specialColor} onClick={confirmHandler}>{shortMessage}</Button>
                     <Button onClick={toggleModal}>Cancel</Button>
                 </React.Fragment>
             </Card>
         </div>
     }
     {!showingConfirmModal &&
-    <Button onClick={toggleModal}>{shortMessage}</Button>
+    <Button color={specialColor} onClick={toggleModal}>{shortMessage}</Button>
     }
     </React.Fragment>
   );

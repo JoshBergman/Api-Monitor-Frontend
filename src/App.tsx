@@ -27,7 +27,7 @@ function App() {
             element={<LandingPage />}
             />
             <Route 
-            path="/guest-home" 
+            path="/work-area" 
             element={<GuestPage />}
             />
             <Route 

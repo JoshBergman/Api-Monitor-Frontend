@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styles from '../Shared/Auth.module.css';
-import Button from '../../UI/Resources/Button';
-import { RootState } from '../../../App/Store';
+import { logIn } from '../../../Features/AuthSlice';
 import settings from '../../../App/Backend';
+import Button from '../../UI/Resources/Button';
+import Error from '../../UI/GUI/Error-Warning/Error';
 
 export default function SignupFields() {
     const [currEmail, setCurrEmail] = useState('');
     const [currPassword, setCurrPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [currError, setCurrError] = useState(false);
 
+    const dispatch = useDispatch();
 
-    const isLoggedIn = useSelector((state:RootState) => state.Auth.hasSID);
-    
     const emailChangeHandler = (action:any) => {
         setCurrEmail(action.target.value)
     };
@@ -22,26 +23,35 @@ export default function SignupFields() {
         setCurrPassword(action.target.value);
     };
 
-    const submitHandler = (event: any) => {
+    const submitHandler = async (event: any) => {
         event.preventDefault();
+        setCurrError(false);
         setIsLoading(true);
 
-        try {
-            const signupResponse = fetch(settings.url + "/signup",{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: currEmail,
-                    password: currPassword
-                })
-            }).then((response) => {
-                return response.json();
-            });
-            console.log(signupResponse);
-        } catch (err) {
+        //http req to create new id. Returns object {error: t/f, sid: account-SID}
+        const signupResponse = await fetch(settings.url + "/signup",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept" : "application/json"
+            },
+            body: JSON.stringify({
+                email: currEmail,
+                password: currPassword
+            })
+        }).then((response) => {
+            return response.json();
+        }).catch((err) => {
+            console.error(err);
+            setCurrError(true);
+        });
 
+        if(signupResponse.error === false){
+            dispatch(logIn(signupResponse.sid))
+            //redirect to homepage
+            return;
+        } else {
+            setCurrError(true);
         }
 
         setIsLoading(false);
@@ -49,6 +59,7 @@ export default function SignupFields() {
 
   return (
     <div>
+        <Error enabled={currError} message={"Cannot create account right now, please try again later."} />
         <h1 className={styles.title}>Create Account</h1>
         <form>
             <div className={styles.inputContainer}>
@@ -63,7 +74,7 @@ export default function SignupFields() {
                 <Button onClick={submitHandler}>Create Account</Button>
             }
             {isLoading &&
-                <Button>Create Account</Button>
+                <Button>Loading</Button>
             }
         </form>
     </div>

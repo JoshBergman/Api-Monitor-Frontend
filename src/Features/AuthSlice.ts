@@ -7,11 +7,14 @@ interface AuthState {
 
 const getInitialState = (): AuthState => {
     const storedSID = localStorage.getItem("SID");
+
     if(storedSID === null){
+    //if no SID is stored
         return {
             hasSID: false
         };
     } else {
+    //case when SID was saved in local storage
         return {
             hasSID: true,
             sid: storedSID
@@ -30,18 +33,18 @@ export const APISlice = createSlice({
             state.hasSID = false;
             state.sid = '';
         },
-        deleteAccount: (state) => {
-            try {
-            localStorage.removeItem("SID");
-            state.hasSID = false;
-            state.sid = '';
-            } catch (err) {
-                
-            }
+        logIn: (state, action) => {
+            const newSID = action.payload;
+            console.log(action.payload)
+            console.log(newSID);
+
+            localStorage.setItem("SID", newSID);
+            state.hasSID = true;
+            state.sid = newSID;
         }
     },
 });
 
-export const {logOut} = APISlice.actions;
+export const {logOut, logIn} = APISlice.actions;
 
 export default APISlice.reducer;

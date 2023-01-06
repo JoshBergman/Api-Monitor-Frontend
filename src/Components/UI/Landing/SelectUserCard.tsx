@@ -20,10 +20,10 @@ export default function SelectUserCard({title, guest, message}:UserCardProps) {
                 <React.Fragment>
                     <ul className={styles.list}>
                         <li className={styles.listItem}>Local Storage</li>
-                        <li className={styles.listItem}>Up to 100 APIs</li>
-                        <li className={styles.listItem}>Quick Setup</li>
+                        <li className={styles.listItem}>Up to 100+ APIs</li>
+                        <li className={styles.listItem}>Express Setup</li>
                     </ul>
-                    <Button to="/guest-home">
+                    <Button to="/work-area">
                         Continue As Guest
                     </Button>
                 </React.Fragment>
