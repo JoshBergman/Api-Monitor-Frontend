@@ -14,6 +14,14 @@
   max-width: 1000px;
 }
 
+input, select {
+  background-color: rgb(223, 204, 180);
+}
+
+.colorTesting {
+  color: rgb(206, 50, 50);
+}
+
 @media (max-width: 680px) {
   .widthControlContainer {
     width: 100%;

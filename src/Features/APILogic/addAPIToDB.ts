@@ -16,6 +16,10 @@ export const addAPIToDB = async (sid:string | undefined, newAPI:API) => {
     }).catch((err) => {
         console.error(err);
     });
+
+    if(addAPIResponse.error === true){
+        console.error(addAPIResponse);
+    }
 };
 
 export const rmAPIFromDB = async (sid:string | undefined, deleteTitle:string) => {
@@ -37,4 +41,8 @@ export const rmAPIFromDB = async (sid:string | undefined, deleteTitle:string) =>
     }).catch((err) => {
         console.error(err);
     });
+
+    if(rmAPIFromDB.error === true){
+        console.error(rmAPIFromDB);
+    }
 };

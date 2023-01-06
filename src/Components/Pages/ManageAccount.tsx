@@ -103,7 +103,7 @@ export default function ManageAccount() {
                     <div className={styles.optionDiv} >
                         <Error enabled={delAccError} message={"Server error, try again later."} />
                         <h2 className={styles.label}>Delete Your Account</h2>
-                        <DoubleConfirmButton color="red" shortMessage='Delete Account' message='delete account and all associated information' clickFunction={deleteAccountHandler} />
+                        <DoubleConfirmButton color="#cd3232" shortMessage='Delete Account' message='delete account and all associated information' clickFunction={deleteAccountHandler} />
                     </div>
                 </React.Fragment>
             }

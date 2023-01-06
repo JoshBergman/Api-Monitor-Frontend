@@ -16,7 +16,7 @@ const lightStyle: StyleState = {
     styles: {
         mainBackground: {backgroundColor: "#EFEFEF"},
         mutedBackground: {backgroundColor: "#E1E1E1"},
-        textColor: {color: "black"},
+        textColor: {color: "#151313"},
         pageBackground: {backgroundColor: "#D3D3D3"},
     },
     isDark: false
@@ -24,10 +24,10 @@ const lightStyle: StyleState = {
 
 const darkStyle: StyleState = {
     styles: {
-        mainBackground: {backgroundColor: "black"},
-        mutedBackground: {backgroundColor: "#494949"},
-        textColor: {color: "white"},
-        pageBackground: {backgroundColor: "#292929"},
+        mainBackground: {backgroundColor: "#101010"},
+        mutedBackground: {backgroundColor: "#101010"},
+        textColor: {color: "#BEACA3"},
+        pageBackground: {backgroundColor: "#1A1A1A"},
     },
     isDark: true
 }

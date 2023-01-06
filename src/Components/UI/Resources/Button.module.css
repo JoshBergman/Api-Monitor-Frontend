@@ -1,6 +1,6 @@
 .button {
-    background-color: rgb(25, 115, 250);
-    color: white;
+    background-color: #b0a18e;
+    color: rgb(0, 0, 0);
     
     padding: 10px;
     border-radius: 20px;
@@ -13,8 +13,8 @@
 
 .button:hover {
     cursor: pointer;
-    background-color: lightblue;
-    color: black;
+    background-color: rgb(218, 209, 193);
+    color: rgb(255, 255, 255);
 }
 
 .darkButton {
