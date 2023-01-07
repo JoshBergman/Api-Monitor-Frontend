@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import styles from './WorkArea.module.css';
@@ -15,17 +16,19 @@ export default function WorkArea() {
     let i = 1; //used for mapping keys
 
   return (
-    <div className={styles.workArea}>
-        <NewAPIForm styleState={styleState} />
-        {APIList.map((API) => {
+    <React.Fragment>
+      <div className={styles.workArea}>
+          <NewAPIForm styleState={styleState} />
+          {APIList.map((API) => {
             i++;
             switch (API.type){
-                case "REST": return <APICard key={i} type="REST" APISettings={API.settings} styleState={styleState} headers={API.headers} />;
-                case "GRAPHQL": return <APICard key={i} type="GRAPHQL" APISettings={API.settings} styleState={styleState} headers={API.headers} />;
-            
-                default: return <APICard key={i} type="Error" APISettings={API.settings} styleState={styleState} headers={API.headers} />;
+              case "REST": return <APICard key={i} type="REST" APISettings={API.settings} styleState={styleState} headers={API.headers} />;
+              case "GRAPHQL": return <APICard key={i} type="GRAPHQL" APISettings={API.settings} styleState={styleState} headers={API.headers} />;
+              
+              default: return <APICard key={i} type="Error" APISettings={API.settings} styleState={styleState} headers={API.headers} />;
             }
-        })}
-    </div> 
-  )
+          })}
+      </div> 
+    </React.Fragment>
+    );
 }

@@ -107,9 +107,9 @@ export const defaultValues: APIState = {
         {
         type: "REST",
         settings: {
-            endpoint: "https://swapi.dev/api/people/1/",
+            endpoint: "https://swapi.dev/api/people/2/",
             method: "GET",
-            title: "REST Demo (SWAPI)"
+            title: "SWAPI People 2 (DEMO)"
         },
         headers: {
             useDefault: true
@@ -120,34 +120,7 @@ export const defaultValues: APIState = {
         settings: {
             endpoint: "https://swapi.dev/api/vehicles/14/",
             method: "GET",
-            title: "Vehicle 14"
-        },
-        headers: {
-            useDefault: true
-        }
-    },
-    {
-        type: "GRAPHQL",
-        settings: {
-            endpoint: "GRAPHQL/OBJ",
-            method: "POST",
-            title: "GRAPH OBJ",
-            body: {value: "twenty", nested: {this: "nested"}}
-        },
-        headers: {
-            useDefault: false,
-            "Content-Type": "appliation/json",
-            customHeader: "ThisIsTrue!",
-            Auth: "be2j0djJSLi3"
-        }
-    },
-    {
-        type: "GRAPHQL",
-        settings: {
-            endpoint: "GRAPHQL/QUERY",
-            method: "POST",
-            title: "GRAPH QUERY",
-            body: "query{user{id,name,job}}"
+            title: "SWAPI Vehicle 14 (DEMO)"
         },
         headers: {
             useDefault: true

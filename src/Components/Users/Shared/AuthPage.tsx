@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import styles from './Auth.module.css';
 import Card from '../../UI/Resources/Card';
 import LoginFields from '../Login/LoginFields';
 import SignupFields from '../Signup/SignupFields';
@@ -18,6 +19,7 @@ export default function AuthPage({isLoginPage}:Props) {
     const isLoggedIn = currState.Auth.hasSID;
 
   return (
+    <div className={styles.footerSpacer}>
     <Card>
         <React.Fragment>
         {isLoggedIn && <p>Already Logged In</p>}
@@ -33,5 +35,6 @@ export default function AuthPage({isLoginPage}:Props) {
         }
         </React.Fragment>
     </Card>
+    </div>
   );
 }

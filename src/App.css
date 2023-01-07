@@ -4,6 +4,7 @@
   height: 100vh;
   position: fixed;
   overflow-y: scroll;
+  padding-bottom: -202px;
 }
 
 .widthControlContainer {
@@ -15,11 +16,7 @@
 }
 
 input, select {
-  background-color: rgb(223, 204, 180);
-}
-
-.colorTesting {
-  color: rgb(206, 50, 50);
+  background-color: #dfccb4;
 }
 
 @media (max-width: 680px) {

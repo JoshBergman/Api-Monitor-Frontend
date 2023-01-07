@@ -1,0 +1,10 @@
+.centerDiv {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+}
+
+.spacerDiv {
+    width: 100%;
+    height: 35vh;
+}
