@@ -1,6 +1,6 @@
 .navContainer {
     float: right;
-    margin-top: 66px;
+    margin-top: 30px;
 
     width: fit-content;
     height: fit-content;
@@ -28,7 +28,8 @@
 }
 
 .hamburger {
-    font-size: 60px;
+    font-size: 40px;
+    margin-top: -10px;
     transition: all 0.2s ease-in-out;
 }
 

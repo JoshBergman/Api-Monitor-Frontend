@@ -27,7 +27,7 @@ const darkStyle: StyleState = {
         mainBackground: {backgroundColor: "#101010"},
         mutedBackground: {backgroundColor: "#101010"},
         textColor: {color: "#BEACA3"},
-        pageBackground: {backgroundColor: "#1A1A1A"},
+        pageBackground: {backgroundColor: "#333333"},
     },
     isDark: true
 }

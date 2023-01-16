@@ -1,11 +1,11 @@
 .mainContainer {
     position: fixed;
     width: 100vw;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 60px);
 
     border-top: 2px solid black;
 
-    top: 100px;
+    top: 60px;
     left: 0px;
 }
 
